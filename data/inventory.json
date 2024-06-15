@@ -1,0 +1,7 @@
+[
+  {"id":"SMJD","name":"one","priceInCents":49,"inStock":true},
+  {"id":"SGJD","name":"two","priceInCents":466,"inStock":false},
+  {"id":"SMGD","name":"three","priceInCents":44,"inStock":true}
+
+
+]
