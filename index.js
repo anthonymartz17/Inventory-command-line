@@ -6,8 +6,8 @@ const {
 	deleteItem,
 	seeInventory,
 } = require("./src/inventory-commands");
-const readline = require("readline");
 
+const readline = require("readline");
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout,
@@ -49,12 +49,12 @@ function run(command) {
 			});
 			break;
 		case "3":
-			rl.question("Enter the ID of the item to update: ", (id) => {
-				rl.question("Enter the new item: ", (newItem) => {
-					updateItem(parseInt(id, 10), newItem);
-					showCommands();
-				});
+			rl.question("Enter new values and ID: ", (item) => {
+				const updatedInventory = updateItem(inventory, item.split(" "));
+				writeJSONFile("./data", "inventory.json", updatedInventory);
+				showCommands();
 			});
+
 			break;
 		case "4":
 			rl.question("Enter the ID of the item to delete: ", (id) => {

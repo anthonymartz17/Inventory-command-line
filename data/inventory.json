@@ -1,7 +1,1 @@
-[
-  {"id":"SMJD","name":"one","priceInCents":49,"inStock":true},
-  {"id":"SGJD","name":"two","priceInCents":466,"inStock":false},
-  {"id":"SMGD","name":"three","priceInCents":44,"inStock":true}
-
-
-]
+[{"id":"SGJD","name":"two","priceInCents":466,"inStock":false},{"id":"SMGD","name":"forty","priceInCents":44,"inStock":"false"},{"id":"q3cw","name":"shirt","priceInCents":400,"inStock":"true"},{"id":"YGHV","name":"pants","priceInCents":300,"inStock":"true"}]

@@ -1,11 +1,5 @@
-const readline = require("readline");
-
-const { nanoid } = require("nanoid");
-
-const rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout,
-});
+const chalk = require("chalk");
+const { nanoid } = require('nanoid');
 
 function addItem(inventory, item) {
 	const itemArray = item.split(" ");
@@ -19,22 +13,32 @@ function addItem(inventory, item) {
 	console.log(
 		`Item '${newItem.name} ${newItem.priceInCents} ${newItem.inStock}'added to the inventory.`
 	);
+	console.table(inventory)
 	return inventory;
 }
 
 function seeItem(inventory, id) {
 	const item = inventory.find((ele) => ele.id === id);
 	if (item) {
-		console.log(`Details: ${item.name} 2${item.priceInCents} ${item.inStock}`);
+		console.log(`Details of item : ${item.id}`);
+		console.table(item)
 	} else {
 		console.log("Item not found.");
 	}
 }
 
 function updateItem(inventory, item) {
-	if (index >= 0 && index < inventory.length) {
-		console.log(`Item '${inventory[index]}' updated to '${newItem}'.`);
-		inventory[index] = newItem;
+	const id = item.find((ele) => ele.split("=")[0] === "id").split("=")[1];
+	const idx = inventory.findIndex((ele) => ele.id === id);
+
+	if (idx >= 0) {
+		item.forEach((ele) => {
+			const [key, value] = ele.split("=");
+			inventory[idx][key] = value;
+			console.log(`Item '${id}' updated.`);
+			console.table(inventory[idx])
+		});
+		return inventory;
 	} else {
 		console.log("Item not found.");
 	}
@@ -42,10 +46,10 @@ function updateItem(inventory, item) {
 
 function deleteItem(inventory, id) {
 	const itemFound = inventory.find((ele) => ele.id == id);
-	console.log(inventory, "k hay");
 	if (itemFound) {
 		inventory = inventory.filter((ele) => ele.id != id);
-		console.log(`Item '${itemFound.name}' deleted from the inventory.`);
+		console.log(`Item successfully deleted.`);
+		console.table(itemFound);
 		return inventory;
 	} else {
 		console.log("Item not found.");
@@ -53,12 +57,8 @@ function deleteItem(inventory, id) {
 }
 
 function seeInventory(inventory) {
-	let table = `Name | Price | In Stock \n\n`;
 	if (inventory.length > 0) {
-		inventory.forEach((item) => {
-			table += `${item.name} --- ${item.priceInCents} --- ${item.inStock}\n`;
-		});
-		console.log(table);
+		console.table(inventory);
 	} else {
 		console.log("Inventory is empty.");
 	}
